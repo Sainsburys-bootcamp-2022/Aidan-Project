@@ -7,8 +7,19 @@
 </head>
 
 <body>
-
     <h1 id="title">Connect 4</h1>
+    <p id="winner-display-red">Red Wins!!</p>
+    <p id="winner-display-yellow">Yellow Wins!!</p>
+    <p id="winner-display-nobody">Nobody Wins, Play Again!!</p>
+    <form>
+        <label class="player1">Red:</label>
+        <input type="text" class="player1" name="player1">
+        <input type="submit" class="player1" value="Submit"><br><br>
+        <label for="player2" class="player2">Yellow:</label>
+        <input type="text" class="player2" name="player2">
+        <input type="submit" class="player2" value="Submit">
+    </form>
+</br></br></br>
     <div id="grid">
         <div class="row" id="row-0">
             <div class="column" id="row-0-column-0"></div>
@@ -65,11 +76,13 @@
             <div class="column" id="row-5-column-6"></div>
         </div>
     </div>
-    <div id="yellow-counter">🟡</div>
-    <div id="red-counter">🔴</div>
     <div id="winner-name"></div>
     <div id="winner-display"></div>
+    <div id="red-counter" style="visibility: hidden"></div>
+    <div id="yellow-counter" style="visibility:hidden"></div>
     </br></br></br>
+    <button id="start-game">Start Game</button>
+    <br>
     <button id="reset-button">Reset Game</button>
     <script src="connect4.js" type="text/javascript"></script>
 </body>

@@ -1,27 +1,113 @@
 .column {
-    width: 600px;
-    height: 70px;
-    margin: 0px;
-    border: 2px black solid;
+    width: 700px;
+    height: 80px;
+    margin: 5px;
+    border: 4px black solid;
+    border-radius: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: white;
 }
+
 .row {
-    width: 600px;
-    margin: 0px auto;
+    width: 700px;
+    height: 80px;
+    margin: 2px auto;
     display: flex;
     justify-content: center;
 }
 
+.red-counter {
+    background-color: red;
+}
+
+.yellow-counter {
+    background-color: yellow;
+}
+
 #title {
     text-align: center;
-    font-size: 600%;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color:hotpink
+    font-size: 80px; 
+    color: rgb(46, 97, 235);
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
+
 #reset-button {
+    margin: auto;
     display: flex;
-    align-items: center;
+    background-color: rgb(46, 97, 235);
+    border-color: black;
+    color: white;
+    padding: 10px 12px;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 12px;
+}
+
+#start-game {
+    margin: auto;
+    display: flex;
+    background-color: rgb(46, 97, 235);
+    border-color: black;
+    color: white;
+    padding: 10px 12px;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 12px;
+}
+
+#grid {
+    width: 730px;
+    height: 630px;
+    margin: auto;
+    display: none;
+    flex-wrap: wrap;
+    background-color: rgb(46, 97, 235);
+}
+
+#winner-display-red {
+    text-align: center;
+    font-size: 60px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: red;
+    font-weight: 550;
+}
+
+#winner-display-yellow {
+    text-align: center;
+    font-size: 60px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: yellow; 
+    font-weight: 550;
+}
+
+#winner-display-nobody {
+    text-align: center;
+    font-size: 60px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 550;
+    color: black
+}
+
+.player1 {
+    margin: auto;
     justify-content: center;
+    text-align: center;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 550;
+    color: red
+}
+
+.player2 {
+    margin: auto;
+    justify-content: center;
+    text-align: center;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 550;
+    color: yellow
 }
