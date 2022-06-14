@@ -7,19 +7,20 @@
 </head>
 
 <body>
+    <body style="background-color:rgb(72, 191, 238)"></body>
     <h1 id="title">Connect 4</h1>
     <p id="winner-display-red">Red Wins!!</p>
     <p id="winner-display-yellow">Yellow Wins!!</p>
     <p id="winner-display-nobody">Nobody Wins, Play Again!!</p>
-    <form>
-        <label class="player1">Red:</label>
-        <input type="text" class="player1" name="player1">
-        <input type="submit" class="player1" value="Submit"><br><br>
-        <label for="player2" class="player2">Yellow:</label>
-        <input type="text" class="player2" name="player2">
-        <input type="submit" class="player2" value="Submit">
+    <form class="player1">
+        <input id="player1Name" type="text" />
+        <button id="p1Submit" type="submit">Submit</button>
     </form>
-</br></br></br>
+</br>
+    <form class="player2">
+        <input id="player2Name" type="text"/>
+        <button id="p2Submit" type="submit">Submit</button>
+    </form>
     <div id="grid">
         <div class="row" id="row-0">
             <div class="column" id="row-0-column-0"></div>
@@ -84,7 +85,8 @@
     <button id="start-game">Start Game</button>
     <br>
     <button id="reset-button">Reset Game</button>
-    <script src="connect4.js" type="text/javascript"></script>
+    <script src="connect4.js" type="text/javascript">
+    </script>
 </body>
 
 </html>

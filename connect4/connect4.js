@@ -47,14 +47,20 @@ function clearBoard() {
 
 
 
-const boardVisibility = document.getElementById("grid")
-// boardVisibility.style.display = "none"
+const boardVisibility = document.getElementById("grid");
 const winnerDisplayRed = document.getElementById("winner-display-red");
-
 const winnerDisplayYellow = document.getElementById("winner-display-yellow");
-
 const winnerDisplayNobody = document.getElementById("winner-display-nobody");
 
+// 3c Reseting the winning variables and creating the clearWinner function
+let winnerRed = null
+let winnerYellow = null
+let winnerNobody = null
+let winner = null
+let takeTurnValue = 0
+let gameOver = null
+let gameStarted = false
+let redsTurn = true
 
 
 // 1f Creating the resetButton
@@ -67,7 +73,12 @@ function resetGame() {
     console.log("resetGame has started")
     clearBoard()
     clearWinner()
-    winnerDisplayOnReset()
+    resetVariables()
+    boardAndNames()
+    console.log("resetGame finished")
+}
+
+function resetVariables() {
     board = newBoard()
     redsTurn = true
     winner = null
@@ -76,21 +87,28 @@ function resetGame() {
     winnerNobody = null
     gameOver = null
     takeTurnValue = 0
-    startGameButton.style.display = "flex"
-    console.log("resetGame finished")
+    gameStarted = false
 }
 
-// function hideBoardOnReset() {
-//     console.log("hideBoardOnReset has finished")
-//     // const boardVisibility = document.getElementById("grid");
-//     boardVisibility.style.display = "none";
-//     console.log("hideBoardOnReset has finished")
-// }
 
-function winnerDisplayOnReset() {
-    winnerDisplayRed.style.dipsly = "none"
-    winnerDisplayYellow.style.display = "none"
-    winnerDisplayNobody.style.display = "none"
+
+function boardAndNames() {
+    console.log("boardAndNames has started")
+    if (gameStarted === false) {
+        startGameButton.style.display = "flex"
+        player1NameInput.style.display = "flex";
+        document.getElementById("p1Submit").style.display = "flex";
+        player2NameInput.style.display = "flex";
+        document.getElementById("p2Submit").style.display = "flex";
+        winnerDisplayRed.style.dipsly = "none"
+        winnerDisplayYellow.style.display = "none"
+        winnerDisplayNobody.style.display = "none"
+        document.getElementById("player1Name").value = "Enter Name"
+        document.getElementById("player2Name").value = "Enter Name"
+    } else 
+        return startGame()
+    
+    console.log("boardAndNames has finished")
 }
 
 // 4b Creating the start game button
@@ -104,58 +122,25 @@ function startGame() {
     // const boardVisibility = document.getElementById("grid");
     boardVisibility.style.display = "flex";
     startGameButton.style.display = "none";
-    // player1NameBox.style.display = "none";
-    // player2NameBox.style.display = "none";
+    player1NameInput.style.display = "none";
+    document.getElementById("p1Submit").style.display = "none";
+    player2NameInput.style.display = "none";
+    document.getElementById("p2Submit").style.display = "none";
     console.log("startGame has finished"
     )
 }
 
+const player1NameInput = document.getElementById("player1Name");
+document.querySelector("form.player1").addEventListener("submit", function (e) {
+    e.preventDefault();
+    console.log(player1NameInput.value)
+})
 
-
-// const player1NameBox = document.getElementsByClassName("player1");
-
-// const player2NameBox = document.getElementsByClassName("player2");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 1e Defining whos turn it is, game will always start on redsTurn so this will be included in the
-// reset game function. This variable will update everytime someone takes a turn and will also be
-// valuable in determining the winner of the game.
-let redsTurn = true
-
+const player2NameInput = document.getElementById("player2Name");
+document.querySelector("form.player2").addEventListener("submit", function (e) {
+    e.preventDefault();
+    console.log(player2NameInput.value)
+})
 
 // 2 Registering turns and updating the board
 
@@ -184,9 +169,6 @@ function takeTurn(rowIndex, columnIndex) {
 
 // 2b Creating the drawBoard function, this will place a counter on the screen at the bottom most part
 // of the column, after takeTurn has executed
-// New drawBoard function, old one was conflicting with takeTurn.
-// This one is called after takeTurn and iterates through the board checking each cell and adjusting the
-// cellText from null to what is defined from takeTurn.
 function drawBoard() {
     console.log("drawBoard has started")
     for (let row = 0; row < 6; row++) {
@@ -216,7 +198,6 @@ function positionClick(rowIndex, columnIndex, event) {
     drawBoard()
     checkWinner()
     displayWinner()
-    // stopGame()
     console.log(winner)
     console.log("positionClick has finished")
 }
@@ -226,12 +207,9 @@ function positionClick(rowIndex, columnIndex, event) {
 for (let rowIndex = 0; rowIndex < board.length; rowIndex++) {
     for (let columnIndex = 0; columnIndex < board[0].length; columnIndex++) {
         const gridPosition = document.getElementById(`row-${rowIndex}-column-${columnIndex}`);
-        // console.log("GRID POSITION",gridPosition)
         gridPosition.addEventListener("click", positionClick.bind(null, rowIndex, columnIndex));
     }
 }
-
-
 
 // 3 Creating the checkWinner function
 
@@ -376,8 +354,8 @@ function checkWinnerDiagUp() {
 function displayWinner() {
     console.log("displayWinner has started")
     if (winner === "red") {
+        winnerDisplayRed.textContent = player1NameInput.value + " Wins!!"
         sleep(1500).then(() => {
-            // const boardVisibility = document.getElementById("grid");
             boardVisibility.style.display = "none";
             console.log("board disappear 1")
         })
@@ -385,8 +363,8 @@ function displayWinner() {
         winnerDisplay.style.display = "block";
     }
     else if (winner === "yellow") {
+        winnerDisplayYellow.textContent = player2NameInput.value + " Wins!!"
         sleep(1500).then(() => {
-            // const boardVisibility = document.getElementById("grid");
             boardVisibility.style.display = "none";
             console.log("board disappear 2")
         })
@@ -395,7 +373,6 @@ function displayWinner() {
     }
     else if (winner === "nobody") {
         sleep(1500).then(() => {
-            // const boardVisibility = document.getElementById("grid");
             boardVisibility.style.display = "none";
             console.log("board disappear 3")
         })
@@ -405,31 +382,14 @@ function displayWinner() {
     console.log("displayWinner has finished")
 }
 
-
-// 3c Reseting the winning variables and creating the clearWinner function
-let winnerRed = null
-let winnerYellow = null
-let winnerNobody = null
-let winner = null
-let takeTurnValue = 0
-let gameOver = null
-// let player1Name = document.getElementById("player1").value;
-
 function clearWinner() {
     console.log("clearWinner has started")
-    // const winnerDisplayRed = document.getElementById("winner-display-red");
     winnerDisplayRed.style.display = "None";
-    // const winnerDisplayYellow = document.getElementById("winner-display-yellow");
     winnerDisplayYellow.style.display = "None";
-    // const winnerDisplayNobody = document.getElementById("winner-display-nobody");
     winnerDisplayNobody.style.display = "None";
-    // const boardVisibility = document.getElementById("grid");
     boardVisibility.style.display = "none";
-    console.log("board disappear 4")
     console.log("clearWinner has finished")
 }
-
-
 
 // 3e Creating the stopGame function to stop turns being taken after a winner is found
 function stopGame() {
@@ -440,42 +400,17 @@ function stopGame() {
     }
 }
 
-
-// 3f Adding player names to the game and winner display
-// function player1Name() {
-//     let player1Name = document.getElementById("player1").value;
-// }
-
-// Creating the sleep function
+// Creating the sleep function to use in displayWinner
 function sleep(ms) {
     console.log("sleep has started")
     return new Promise(resolve => setTimeout(resolve, ms))
 }
-
-
-// // 4 Hiding the board at the start of the game
-// // 4a Added a line to resetGame to hide board
-
-
-// // 4b Creating the start game button
-// const startGameButton = document.getElementById("start-game");
-// startGameButton.addEventListener("click", startGame);
-
-
-// //4c Creating the startGame function
-// function startGame() {
-    // const boardVisibility = document.getElementById("grid");
-//     boardVisibility.style.display = "flex";
-// }
-
-
 
 // 3d Running the resetGame function when the page first loads
 document.addEventListener('DOMContentLoaded', resetGame())
 // resetGame()
 // console.log("game ready")
 
-// module.exports = connect4
 
 
 if (typeof exports === 'object') {
