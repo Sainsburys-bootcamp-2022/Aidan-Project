@@ -1,22 +1,23 @@
-function checkWinnerHorizontal() {
+function checkWinnerHorizontal(board) {
     for (let row = 0; row < 6; row++) {
         for (let column = 0; column < 4; column++) {
             if (board[row][column] === "red" && board[row][column + 1] === "red") {
                 if (board[row][column] === "red" && board[row][column + 2] === "red") {
                     if (board[row][column] === "red" && board[row][column + 3] === "red") {
-                        winnerRed = true
+                        return "red"
                     }
                 }
             }
             if (board[row][column] === "yellow" && board[row][column + 1] === "yellow") {
                 if (board[row][column] === "yellow" && board[row][column + 2] === "yellow") {
                     if (board[row][column] === "yellow" && board[row][column + 3] === "yellow") {
-                        winnerYellow = true
+                        return "yellow"
                     }
                 }
             }
         }
-    }
+    } 
+    return false
 }
 
 let board = [

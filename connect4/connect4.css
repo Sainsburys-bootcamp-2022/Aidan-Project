@@ -59,6 +59,19 @@
     border-radius: 12px;
 }
 
+#reset-score-button {
+    margin: auto;
+    display: flex;
+    background-color: rgb(46, 97, 235);
+    border-color: black;
+    color: white;
+    padding: 10px 12px;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 12px;
+}
+
 #grid {
     width: 730px;
     height: 630px;

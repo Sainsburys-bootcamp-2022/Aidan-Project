@@ -361,6 +361,7 @@ function displayWinner() {
         })
         const winnerDisplay = document.getElementById("winner-display-red");
         winnerDisplay.style.display = "block";
+        scoreBoardRed = scoreBoardRed + 1
     }
     else if (winner === "yellow") {
         winnerDisplayYellow.textContent = player2NameInput.value + " Wins!!"
@@ -370,6 +371,7 @@ function displayWinner() {
         })
         const winnerDisplay = document.getElementById("winner-display-yellow");
         winnerDisplay.style.display = "block";
+        scoreBoardYellow = scoreBoardYellow + 1
     }
     else if (winner === "nobody") {
         sleep(1500).then(() => {
@@ -423,3 +425,20 @@ if (typeof exports === 'object') {
 } else {
     console.log("Running in Browser")
 }
+
+
+
+
+// Creating the scoreboard
+// let scoreBoardRed = null
+// let scoreBoardYellow = null
+
+// function resetScoreBoard() {
+//     scoreBoardRed = null
+//     scoreBoardYellow = null
+// }
+
+// const resetScoreBoardButton = document.getElementById("reset-score-button");
+// resetButton.addEventListener("click", resetScoreBoard);
+
+
