@@ -1,0 +1,22 @@
+const boardVisibility = document.getElementById("grid");
+const winnerDisplayRed = document.getElementById("winner-display-red");
+const winnerDisplayYellow = document.getElementById("winner-display-yellow");
+const winnerDisplayNobody = document.getElementById("winner-display-nobody");
+
+const resetButton = document.getElementById("reset-button");
+resetButton.addEventListener("click", resetGame);
+
+const startGameButton = document.getElementById("start-game");
+startGameButton.addEventListener("click", startGame);
+
+const player1NameInput = document.getElementById("player1Name");
+document.querySelector("form.player1").addEventListener("submit", function (e) {
+    e.preventDefault();
+    console.log(player1NameInput.value)
+})
+
+const player2NameInput = document.getElementById("player2Name");
+document.querySelector("form.player2").addEventListener("submit", function (e) {
+    e.preventDefault();
+    console.log(player2NameInput.value)
+})

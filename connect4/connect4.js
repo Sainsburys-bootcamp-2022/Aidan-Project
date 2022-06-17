@@ -1,5 +1,10 @@
 // Step 1 - Setting the board up
 
+import {checkWinnerHorizontal, checkWinnerVertical, checkWinnerDiagDown, checkWinnerDiagUp} from './checkWinner.js';
+// import {checkWinnerHorizontal} from './checkWinner.js'
+// import {checkWinnerVertical} from './checkWinner.js'
+// import {checkWinnerDiagDown} from './checkWinner.js'
+// import {checkWinnerDiagUp} from './checkWinner.js'
 
 // 1a Creating a board that will be updated after each turn
 let board = [
@@ -25,10 +30,10 @@ const newBoard = () => [
 
 
 // 1c Creating the getBoard function, this will be used after every takeTurn to display the new board
-function getBoard() {
-    console.log("getBoard has started")
-    return board
-}
+// function getBoard() {
+//     console.log("getBoard has started")
+//     return board
+// }
 
 
 // 1d Creating clearBoard function, this will clear the visual html values from the board
@@ -88,6 +93,10 @@ function resetVariables() {
     gameOver = null
     takeTurnValue = 0
     gameStarted = false
+    horizontalWinnerIs = null
+    veticalWinnerIs = null
+    diagDownWinnerIs = null
+    diagUpWinnerIs = null
 }
 
 
@@ -180,7 +189,6 @@ function drawBoard() {
             else if (board[row][column] === "yellow") {
                 const cellText = board[row][column] === "yellow" ? "yellow-counter" : "red-counter";
                 document.getElementById(`row-${row}-column-${column}`).classList.add(cellText)
-                
             }
         }
     }
@@ -213,45 +221,63 @@ for (let rowIndex = 0; rowIndex < board.length; rowIndex++) {
 
 // 3 Creating the checkWinner function
 
+let horizontalWinnerIs = null
+let veticalWinnerIs = null
+let diagDownWinnerIs = null
+let diagUpWinnerIs = null
+
+// function gotHorizontalWinner() {
+//     horizontalWinnerIs = checkWinnerHorizontal()
+// }
+
+function gotWinner() {
+    horizontalWinnerIs = checkWinnerHorizontal();
+    veticalWinnerIs = checkWinnerVertical();
+    diagDownWinnerIs = checkWinnerDiagDown();
+    diagUpWinnerIs = checkWinnerDiagUp()
+}    
+
 // 3a
 function checkWinner() {
     console.log("checkWinner has started")
+    gotWinner()
+    // console.log("winner is", gotWinner)
     for (let i = 0; i < 1; i++) {
         checkWinnerHorizontal();
-        if (winnerRed === true) {
+        if (horizontalWinnerIs === "red") {
             gameOver = gameOver + 1
             console.log("Red Wins Horizontally!")
             return winner = "red"
-        } else if (winnerYellow === true) {
+        } else if (horizontalWinnerIs === "yellow") {
             gameOver = gameOver + 1
             console.log("Yellow Wins Horizontally!")
             return winner = "yellow"
         }
         checkWinnerVertical();
-        if (winnerRed === true) {
+        if (veticalWinnerIs === "red") {
             gameOver = gameOver + 1
             console.log("Red Wins Vertically!")
             return winner = "red"
-        } else if (winnerYellow === true) {
+        } else if (veticalWinnerIs === "yellow") {
             console.log("Yellow Wins Vertically!")
             return winner = "yellow"
         }
         checkWinnerDiagDown();
-        if (winnerRed === true) {
+        if (diagDownWinnerIs === "red") {
             gameOver = gameOver + 1
             console.log("Red Wins Diagonolly Down!")
             return winner = "red"
-        } else if (winnerYellow === true) {
+        } else if (diagDownWinnerIs === "yellow") {
             gameOver = gameOver + 1
             console.log("Yellow Wins Diagonolly Down!")
             return winner = "yellow"
         }
         checkWinnerDiagUp();
-        if (winnerRed === true) {
+        if (diagUpWinnerIs === "red") {
             gameOver = gameOver + 1
             console.log("Red Wins Diagonally Up!")
             return winner = "red"
-        } else if (winnerYellow === true) {
+        } else if (diagUpWinnerIs === "yellow") {
             gameOver = gameOver + 1
             console.log("Yellow Wins Diagonally Up!")
             return winner = "yellow"
@@ -265,106 +291,112 @@ function checkWinner() {
     console.log("checkWinner has finished")
 }
 
-function checkWinnerHorizontal() {
-    for (let row = 0; row < 6; row++) {
-        for (let column = 0; column < 4; column++) {
-            if (board[row][column] === "red" && board[row][column + 1] === "red") {
-                if (board[row][column] === "red" && board[row][column + 2] === "red") {
-                    if (board[row][column] === "red" && board[row][column + 3] === "red") {
-                        winnerRed = true
-                    }
-                }
-            }
-            if (board[row][column] === "yellow" && board[row][column + 1] === "yellow") {
-                if (board[row][column] === "yellow" && board[row][column + 2] === "yellow") {
-                    if (board[row][column] === "yellow" && board[row][column + 3] === "yellow") {
-                        winnerYellow = true
-                    }
-                }
-            }
-        }
-    }
-}
+// function checkWinnerHorizontal() {
+//     for (let row = 0; row < 6; row++) {
+//         for (let column = 0; column < 4; column++) {
+//             if (board[row][column] === "red" && board[row][column + 1] === "red") {
+//                 if (board[row][column] === "red" && board[row][column + 2] === "red") {
+//                     if (board[row][column] === "red" && board[row][column + 3] === "red") {
+//                         console.log("returning red")
+//                         return "red"
+//                     }
+//                 }
+//             }
+//             if (board[row][column] === "yellow" && board[row][column + 1] === "yellow") {
+//                 if (board[row][column] === "yellow" && board[row][column + 2] === "yellow") {
+//                     if (board[row][column] === "yellow" && board[row][column + 3] === "yellow") {
+//                         return "yellow"
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
 
-function checkWinnerVertical() {
-    for (let row = 0; row < 3; row++) {
-        for (let column = 0; column < 7; column++) {
-            if (board[row][column] === "red" && board[row + 1][column] === "red") {
-                if (board[row][column] === "red" && board[row + 2][column] === "red") {
-                    if (board[row][column] === "red" && board[row + 3][column] === "red") {
-                        winnerRed = true
-                    }
-                }
-            }
-            else if (board[row][column] === "yellow" && board[row + 1][column] === "yellow") {
-                if (board[row][column] === "yellow" && board[row + 2][column] === "yellow") {
-                    if (board[row][column] === "yellow" && board[row + 3][column] === "yellow") {
-                        winnerYellow = true
-                    }
-                }
-            }
-        }
-    }
-}
+// function checkWinnerVertical() {
+//     for (let row = 0; row < 3; row++) {
+//         for (let column = 0; column < 7; column++) {
+//             if (board[row][column] === "red" && board[row + 1][column] === "red") {
+//                 if (board[row][column] === "red" && board[row + 2][column] === "red") {
+//                     if (board[row][column] === "red" && board[row + 3][column] === "red") {
+//                         return "red"
+//                     }
+//                 }
+//             }
+//             else if (board[row][column] === "yellow" && board[row + 1][column] === "yellow") {
+//                 if (board[row][column] === "yellow" && board[row + 2][column] === "yellow") {
+//                     if (board[row][column] === "yellow" && board[row + 3][column] === "yellow") {
+//                         return "yellow"
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
 
-function checkWinnerDiagDown() {
-    for (let row = 0; row < 3; row++) {
-        for (let column = 0; column < 3; column++) {
-            if (board[row][column] === "red" && board[row + 1][column + 1] === "red") {
-                if (board[row][column] === "red" && board[row + 2][column + 2] === "red") {
-                    if (board[row][column] === "red" && board[row + 3][column + 3] === "red") {
-                        winnerRed = true
-                    }
-                }
-            }
-            else if (board[row][column] === "yellow" && board[row + 1][column + 1] === "yellow") {
-                if (board[row][column] === "yellow" && board[row + 2][column + 2] === "yellow") {
-                    if (board[row][column] === "yellow" && board[row + 3][column + 3] === "yellow") {
-                        winnerYellow = true
-                    }
-                }
-            }
-        }
-    }
-}
+// function checkWinnerDiagDown() {
+//     for (let row = 0; row < 3; row++) {
+//         for (let column = 0; column < 3; column++) {
+//             if (board[row][column] === "red" && board[row + 1][column + 1] === "red") {
+//                 if (board[row][column] === "red" && board[row + 2][column + 2] === "red") {
+//                     if (board[row][column] === "red" && board[row + 3][column + 3] === "red") {
+//                         return "red"
+//                     }
+//                 }
+//             }
+//             else if (board[row][column] === "yellow" && board[row + 1][column + 1] === "yellow") {
+//                 if (board[row][column] === "yellow" && board[row + 2][column + 2] === "yellow") {
+//                     if (board[row][column] === "yellow" && board[row + 3][column + 3] === "yellow") {
+//                         return "red"
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
 
-function checkWinnerDiagUp() {
-    for (let row = 3; row < 6; row++) {
-        for (let column = 0; column < 4; column++) {
-            if (board[row][column] === "red" && board[row - 1][column + 1] === "red") {
-                if (board[row][column] === "red" && board[row - 2][column + 2] === "red") {
-                    if (board[row][column] === "red" && board[row - 3][column + 3] === "red") {
-                        winnerRed = true
-                    }
-                }
-            }
-            else if (board[row][column] === "yellow" && board[row - 1][column + 1] === "yellow") {
-                if (board[row][column] === "yellow" && board[row - 2][column + 2] === "yellow") {
-                    if (board[row][column] === "yellow" && board[row - 3][column + 3] === "yellow") {
-                        winnerYellow = true
-                    }
-                }
-            }
-        }
-    }
-}
+// function checkWinnerDiagUp() {
+//     for (let row = 3; row < 6; row++) {
+//         for (let column = 0; column < 4; column++) {
+//             if (board[row][column] === "red" && board[row - 1][column + 1] === "red") {
+//                 if (board[row][column] === "red" && board[row - 2][column + 2] === "red") {
+//                     if (board[row][column] === "red" && board[row - 3][column + 3] === "red") {
+//                         return "red"
+//                     }
+//                 }
+//             }
+//             else if (board[row][column] === "yellow" && board[row - 1][column + 1] === "yellow") {
+//                 if (board[row][column] === "yellow" && board[row - 2][column + 2] === "yellow") {
+//                     if (board[row][column] === "yellow" && board[row - 3][column + 3] === "yellow") {
+//                         return "yellow"
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
 
 
 // 3b Creating displayWinner function
+
+
 function displayWinner() {
     console.log("displayWinner has started")
     if (winner === "red") {
         winnerDisplayRed.textContent = player1NameInput.value + " Wins!!"
+        addRedScore()
         sleep(1500).then(() => {
             boardVisibility.style.display = "none";
             console.log("board disappear 1")
         })
         const winnerDisplay = document.getElementById("winner-display-red");
         winnerDisplay.style.display = "block";
-        scoreBoardRed = scoreBoardRed + 1
+        // need to add 1 to reds score
     }
     else if (winner === "yellow") {
         winnerDisplayYellow.textContent = player2NameInput.value + " Wins!!"
+        addYellowScore()
         sleep(1500).then(() => {
             boardVisibility.style.display = "none";
             console.log("board disappear 2")
@@ -394,13 +426,38 @@ function clearWinner() {
 }
 
 // 3e Creating the stopGame function to stop turns being taken after a winner is found
-function stopGame() {
-    console.log("stopGame has started")
-    if (gameOver === 2) {
-        alert("The game is over, please reset")
-        console.log("stopGame has finished")
-    }
+// function stopGame() {
+//     console.log("stopGame has started")
+//     if (gameOver === 2) {
+//         alert("The game is over, please reset")
+//         console.log("stopGame has finished")
+//     }
+// }
+
+
+// Creating the scoreboard
+const redScore = document.getElementById("score-red")
+const yellowScore = document.getElementById("score-yellow")
+let scoreRed = redScore.innerHTML
+let scoreYellow = yellowScore.innerHTML
+
+function addRedScore() {
+    scoreRed++
+    redScore.innerHTML = scoreRed
 }
+function addYellowScore() {
+    scoreYellow++
+    yellowScore.innerHTML = scoreYellow
+}
+
+function resetScoreBoard() {
+    console.log("reset score")
+    redScore.innerHTML = 0
+    yellowScore.innerHTML = 0
+}
+
+const resetScoreBoardButton = document.getElementById("reset-score-button");
+resetScoreBoardButton.addEventListener("click", resetScoreBoard);
 
 // Creating the sleep function to use in displayWinner
 function sleep(ms) {
@@ -415,30 +472,10 @@ document.addEventListener('DOMContentLoaded', resetGame())
 
 
 
-if (typeof exports === 'object') {
-    console.log("Running in Node")
-    // Node. Does not work with strict CommonJS, but only CommonJS-like
-    // environments that support module.exports, like Node.
-    module.exports = {
-        stopGame,
-    }
-} else {
-    console.log("Running in Browser")
+export {
+    board
 }
 
 
-
-
-// Creating the scoreboard
-// let scoreBoardRed = null
-// let scoreBoardYellow = null
-
-// function resetScoreBoard() {
-//     scoreBoardRed = null
-//     scoreBoardYellow = null
-// }
-
-// const resetScoreBoardButton = document.getElementById("reset-score-button");
-// resetButton.addEventListener("click", resetScoreBoard);
 
 

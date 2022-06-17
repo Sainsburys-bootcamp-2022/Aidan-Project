@@ -12,18 +12,24 @@
     <p id="winner-display-red">Red Wins!!</p>
     <p id="winner-display-yellow">Yellow Wins!!</p>
     <p id="winner-display-nobody">Nobody Wins, Play Again!!</p>
+        <div id="players">
+            <p id="red-score">Red Score</p>
+            <p id="yellow-score">Yellow Score</p>
+        </div>
+        <div id="scores">
+            <p id="score-red">0</p>
+            <p id="score-yellow">0</p>
+        </div>
+    
     <form class="player1">
         <input id="player1Name" type="text" />
         <button id="p1Submit" type="submit">Submit</button>
     </form>
-</br>
+    </br>
     <form class="player2">
         <input id="player2Name" type="text"/>
         <button id="p2Submit" type="submit">Submit</button>
     </form>
-    <!-- <p id="red-score">
-        Red Score
-    </div> -->
     <div id="grid">
         <div class="row" id="row-0">
             <div class="column" id="row-0-column-0"></div>
@@ -89,8 +95,8 @@
     <br>
     <button id="reset-button">Reset Game</button>
     <br>
-    <!-- <button id="reset-score-button">Reset Score</button> -->
-    <script src="connect4.js" type="text/javascript">
+    <button id="reset-score-button">Reset Score</button>
+    <script src="connect4.js" type="module">
     </script>
 </body>
 
