@@ -7,28 +7,29 @@
 </head>
 
 <body>
+
     <body style="background-color:rgb(72, 191, 238)"></body>
     <h1 id="title">Connect 4</h1>
-    <p id="winner-display-red">Red Wins!!</p>
-    <p id="winner-display-yellow">Yellow Wins!!</p>
-    <p id="winner-display-nobody">Nobody Wins, Play Again!!</p>
-        <div id="players">
-            <p id="red-score">Red Score</p>
-            <p id="yellow-score">Yellow Score</p>
-        </div>
-        <div id="scores">
-            <p id="score-red">0</p>
-            <p id="score-yellow">0</p>
-        </div>
-    
+    <div id="players">
+        <p id="winner-display-red">Red Wins!!</p>
+        <p id="winner-display-yellow">Yellow Wins!!</p>
+        <p id="winner-display-nobody">Nobody Wins, Play Again!!</p>
+        <p id="red-score">Red Score</p>
+        <p id="yellow-score">Yellow Score</p>
+    </div>
+    <br><br><br>
+    <div id="scores">
+        <p id="score-red">0</p>
+        <p id="score-yellow">0</p>
+    </div>
     <form class="player1">
         <input id="player1Name" type="text" />
-        <button id="p1Submit" type="submit">Submit</button>
+        <!-- <button id="p1NameReset" type="submit">Reset Name</button> -->
     </form>
     </br>
     <form class="player2">
-        <input id="player2Name" type="text"/>
-        <button id="p2Submit" type="submit">Submit</button>
+        <input id="player2Name" type="text" />
+        <!-- <button id="p2NameReset" type="submit">Reset Name</button> -->
     </form>
     <div id="grid">
         <div class="row" id="row-0">
@@ -93,9 +94,11 @@
     </br></br></br>
     <button id="start-game">Start Game</button>
     <br>
-    <button id="reset-button">Reset Game</button>
+    <button id="new-game">New Game</button>
     <br>
-    <button id="reset-score-button">Reset Score</button>
+    <button id="reset-button">Reset Game</button>
+    <!-- <button id="reset-score-button">Reset Score</button>
+    <br> -->
     <script src="connect4.js" type="module">
     </script>
 </body>

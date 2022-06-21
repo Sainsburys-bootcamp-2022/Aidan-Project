@@ -80,6 +80,9 @@ function resetGame() {
     clearWinner()
     resetVariables()
     boardAndNames()
+    resetScoreBoard()
+    resetName1()
+    resetName2()
     console.log("resetGame finished")
 }
 
@@ -99,21 +102,31 @@ function resetVariables() {
     diagUpWinnerIs = null
 }
 
+function newGame() {
+    console.log("newGame has started")
+    clearBoard()
+    clearWinner()
+    resetVariables()
+    boardAndNames()
+    startGame()
+}
 
+const newGameButton = document.getElementById("new-game")
+newGameButton.addEventListener("click", newGame)
 
 function boardAndNames() {
     console.log("boardAndNames has started")
     if (gameStarted === false) {
         startGameButton.style.display = "flex"
+        newGameButton.style.display = "none"
         player1NameInput.style.display = "flex";
-        document.getElementById("p1Submit").style.display = "flex";
+        // document.getElementById("p1NameReset").style.display = "flex";
         player2NameInput.style.display = "flex";
-        document.getElementById("p2Submit").style.display = "flex";
+        // document.getElementById("p2NameReset").style.display = "flex";
         winnerDisplayRed.style.dipsly = "none"
         winnerDisplayYellow.style.display = "none"
         winnerDisplayNobody.style.display = "none"
-        document.getElementById("player1Name").value = "Enter Name"
-        document.getElementById("player2Name").value = "Enter Name"
+        // resetScoreBoardButton.style.display = "flex"
     } else 
         return startGame()
     
@@ -131,13 +144,21 @@ function startGame() {
     // const boardVisibility = document.getElementById("grid");
     boardVisibility.style.display = "flex";
     startGameButton.style.display = "none";
+    newGameButton.style.display = "flex";
+    // resetButton.style.display = "none";
     player1NameInput.style.display = "none";
-    document.getElementById("p1Submit").style.display = "none";
+    // document.getElementById("p1NameReset").style.display = "none";
     player2NameInput.style.display = "none";
-    document.getElementById("p2Submit").style.display = "none";
+    // document.getElementById("p2NameReset").style.display = "none";
+    // resetScoreBoardButton.style.display = "none"
+    redScoreName.textContent = player1NameInput.value + "'s Score"
+    yellowScoreName.textContent = player2NameInput.value + "'s Score"
+    showScoreboard()
     console.log("startGame has finished"
     )
 }
+const redScoreName = document.getElementById("red-score")
+const yellowScoreName = document.getElementById("yellow-score")
 
 const player1NameInput = document.getElementById("player1Name");
 document.querySelector("form.player1").addEventListener("submit", function (e) {
@@ -145,11 +166,27 @@ document.querySelector("form.player1").addEventListener("submit", function (e) {
     console.log(player1NameInput.value)
 })
 
+// const p1NameReset = document.getElementById("p1NameReset")
+// p1NameReset.addEventListener("click", resetName1)
+
+function resetName1() {
+    document.getElementById("player1Name").value = "Enter Name"
+    redScoreName.textContent = "Red Score"
+}
+
 const player2NameInput = document.getElementById("player2Name");
 document.querySelector("form.player2").addEventListener("submit", function (e) {
     e.preventDefault();
     console.log(player2NameInput.value)
 })
+
+// const p2NameReset = document.getElementById("p2NameReset")
+// p2NameReset.addEventListener("click", resetName2)
+
+function resetName2() {
+    document.getElementById("player2Name").value = "Enter Name"
+    yellowScoreName.textContent = "Yellow Score"
+}
 
 // 2 Registering turns and updating the board
 
@@ -392,7 +429,6 @@ function displayWinner() {
         })
         const winnerDisplay = document.getElementById("winner-display-red");
         winnerDisplay.style.display = "block";
-        // need to add 1 to reds score
     }
     else if (winner === "yellow") {
         winnerDisplayYellow.textContent = player2NameInput.value + " Wins!!"
@@ -403,7 +439,6 @@ function displayWinner() {
         })
         const winnerDisplay = document.getElementById("winner-display-yellow");
         winnerDisplay.style.display = "block";
-        scoreBoardYellow = scoreBoardYellow + 1
     }
     else if (winner === "nobody") {
         sleep(1500).then(() => {
@@ -454,10 +489,27 @@ function resetScoreBoard() {
     console.log("reset score")
     redScore.innerHTML = 0
     yellowScore.innerHTML = 0
+    scoreRed = 0
+    scoreYellow = 0
+    hideScoreboard()
 }
 
-const resetScoreBoardButton = document.getElementById("reset-score-button");
-resetScoreBoardButton.addEventListener("click", resetScoreBoard);
+function hideScoreboard() {
+    redScore.style.display = "none"
+    yellowScore.style.display = "none"
+    redScoreName.style.display = "none"
+    yellowScoreName.style.display = "none"
+}
+
+function showScoreboard() {
+    redScore.style.display = "block"
+    yellowScore.style.display = "block"
+    redScoreName.style.display = "block"
+    yellowScoreName.style.display = "block"
+}
+
+// const resetScoreBoardButton = document.getElementById("reset-score-button");
+// resetScoreBoardButton.addEventListener("click", resetScoreBoard);
 
 // Creating the sleep function to use in displayWinner
 function sleep(ms) {
