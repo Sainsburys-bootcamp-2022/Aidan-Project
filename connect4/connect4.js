@@ -1,10 +1,6 @@
 // Step 1 - Setting the board up
 
 import {checkWinnerHorizontal, checkWinnerVertical, checkWinnerDiagDown, checkWinnerDiagUp} from './checkWinner.js';
-// import {checkWinnerHorizontal} from './checkWinner.js'
-// import {checkWinnerVertical} from './checkWinner.js'
-// import {checkWinnerDiagDown} from './checkWinner.js'
-// import {checkWinnerDiagUp} from './checkWinner.js'
 
 // 1a Creating a board that will be updated after each turn
 let board = [
@@ -27,15 +23,6 @@ const newBoard = () => [
     [null, null, null, null, null, null, null],
 ]
 
-
-
-// 1c Creating the getBoard function, this will be used after every takeTurn to display the new board
-// function getBoard() {
-//     console.log("getBoard has started")
-//     return board
-// }
-
-
 // 1d Creating clearBoard function, this will clear the visual html values from the board
 function clearBoard() {
     console.log("clearBoard has started")
@@ -47,15 +34,19 @@ function clearBoard() {
     console.log("clearBoard has finised")
 }
 
-
-
-
-
-
 const boardVisibility = document.getElementById("grid");
 const winnerDisplayRed = document.getElementById("winner-display-red");
 const winnerDisplayYellow = document.getElementById("winner-display-yellow");
 const winnerDisplayNobody = document.getElementById("winner-display-nobody");
+
+const newGameButton = document.getElementById("new-game")
+newGameButton.addEventListener("click", newGame)
+
+const resetButton = document.getElementById("reset-button");
+resetButton.addEventListener("click", resetGame);
+
+const startGameButton = document.getElementById("start-game");
+startGameButton.addEventListener("click", startGame);
 
 // 3c Reseting the winning variables and creating the clearWinner function
 let winnerRed = null
@@ -66,12 +57,6 @@ let takeTurnValue = 0
 let gameOver = null
 let gameStarted = false
 let redsTurn = true
-
-
-// 1f Creating the resetButton
-const resetButton = document.getElementById("reset-button");
-resetButton.addEventListener("click", resetGame);
-
 
 // 1d Creating the resetGame function, will either be called by clicking button or when game ends
 function resetGame() {
@@ -111,9 +96,6 @@ function newGame() {
     startGame()
 }
 
-const newGameButton = document.getElementById("new-game")
-newGameButton.addEventListener("click", newGame)
-
 function boardAndNames() {
     console.log("boardAndNames has started")
     if (gameStarted === false) {
@@ -132,11 +114,6 @@ function boardAndNames() {
     
     console.log("boardAndNames has finished")
 }
-
-// 4b Creating the start game button
-const startGameButton = document.getElementById("start-game");
-startGameButton.addEventListener("click", startGame);
-
 
 //4c Creating the startGame function
 function startGame() {
@@ -166,9 +143,6 @@ document.querySelector("form.player1").addEventListener("submit", function (e) {
     console.log(player1NameInput.value)
 })
 
-// const p1NameReset = document.getElementById("p1NameReset")
-// p1NameReset.addEventListener("click", resetName1)
-
 function resetName1() {
     document.getElementById("player1Name").value = "Enter Name"
     redScoreName.textContent = "Red Score"
@@ -179,9 +153,6 @@ document.querySelector("form.player2").addEventListener("submit", function (e) {
     e.preventDefault();
     console.log(player2NameInput.value)
 })
-
-// const p2NameReset = document.getElementById("p2NameReset")
-// p2NameReset.addEventListener("click", resetName2)
 
 function resetName2() {
     document.getElementById("player2Name").value = "Enter Name"
@@ -211,8 +182,6 @@ function takeTurn(rowIndex, columnIndex) {
     console.log("takeTurn has finsihed")
 }
 
-
-
 // 2b Creating the drawBoard function, this will place a counter on the screen at the bottom most part
 // of the column, after takeTurn has executed
 function drawBoard() {
@@ -232,7 +201,6 @@ function drawBoard() {
     console.log("drawBoard has finished")
 }
 
-
 // 2c Creating the positionClick function, this function will do multiple things, first it will detect
 // where on the board has been clicked, it will then run the takeTurn function that will edit the cellText
 // of the cell, it will then call the drawBoard function which will update the HTML with the correct counter.
@@ -247,7 +215,6 @@ function positionClick(rowIndex, columnIndex, event) {
     console.log("positionClick has finished")
 }
 
-
 // 2d Creating the bind click event for the grid
 for (let rowIndex = 0; rowIndex < board.length; rowIndex++) {
     for (let columnIndex = 0; columnIndex < board[0].length; columnIndex++) {
@@ -257,15 +224,10 @@ for (let rowIndex = 0; rowIndex < board.length; rowIndex++) {
 }
 
 // 3 Creating the checkWinner function
-
 let horizontalWinnerIs = null
 let veticalWinnerIs = null
 let diagDownWinnerIs = null
 let diagUpWinnerIs = null
-
-// function gotHorizontalWinner() {
-//     horizontalWinnerIs = checkWinnerHorizontal()
-// }
 
 function gotWinner() {
     horizontalWinnerIs = checkWinnerHorizontal();
@@ -460,16 +422,6 @@ function clearWinner() {
     console.log("clearWinner has finished")
 }
 
-// 3e Creating the stopGame function to stop turns being taken after a winner is found
-// function stopGame() {
-//     console.log("stopGame has started")
-//     if (gameOver === 2) {
-//         alert("The game is over, please reset")
-//         console.log("stopGame has finished")
-//     }
-// }
-
-
 // Creating the scoreboard
 const redScore = document.getElementById("score-red")
 const yellowScore = document.getElementById("score-yellow")
@@ -508,9 +460,6 @@ function showScoreboard() {
     yellowScoreName.style.display = "block"
 }
 
-// const resetScoreBoardButton = document.getElementById("reset-score-button");
-// resetScoreBoardButton.addEventListener("click", resetScoreBoard);
-
 // Creating the sleep function to use in displayWinner
 function sleep(ms) {
     console.log("sleep has started")
@@ -519,9 +468,6 @@ function sleep(ms) {
 
 // 3d Running the resetGame function when the page first loads
 document.addEventListener('DOMContentLoaded', resetGame())
-// resetGame()
-// console.log("game ready")
-
 
 
 export {
